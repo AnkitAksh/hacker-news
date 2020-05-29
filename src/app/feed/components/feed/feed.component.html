@@ -1,0 +1,42 @@
+<div class="container main">
+    <nav class="navbar navbar-expand-lg nav-color">
+        <img class="navbar-brand" src="https://news.ycombinator.com/y18.gif">
+        <div>
+            <button class="custom" (click)="topfeeds()">Top</button>
+            <button class="custom" (click)="newFeeds()">New</button>
+            <button class="custom" (click)="reset()">Reset</button>
+        </div>
+    </nav>
+    <table class="table table-striped">
+        <tbody>
+            <tr *ngFor="let row of rows; let i = index">
+                <td></td>
+                <!-- number of comments -->
+                <td title="number of comments">{{row.num_comments}}</td>
+                <td></td>
+                <!-- upvotes -->
+                <td title="action upvotes">
+                    {{row.points}}
+                    <!-- action upvotes -->
+                    <div class="arrow-up" (click)="upVote(i)"></div>
+                </td>
+                <td>
+                    <!-- title -->
+                    <span class="dark">
+                        {{row.title}}
+                    </span>
+                    <!-- link domain -->
+                    <a *ngIf="row.url" class="faded" [href]="row.url">({{row.url | shortUrl}})</a>
+                    <!-- username -->
+                    <span class="faded"> by</span>
+                    <span class="dark"> {{row.author}} </span>
+                    <!-- passed when -->
+                    <span class="faded">{{row.created_at | time}}</span>
+                    <button (click)="hide(i)" class="btn-hide">hide</button>
+                </td>
+                <!-- <td><button (click)="hide(i)">hide</button></td> -->
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-link" style="outline: none;" (click)="more()">more</button>
+</div>
